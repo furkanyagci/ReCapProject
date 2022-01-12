@@ -14,34 +14,49 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        public void Add(Car car)
-        {
-            _carDal.Add(car);
-        }
-
-        public void Delete(Car car)
-        {
-            _carDal.Delete(car);
-        }
 
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
         }
 
-        public List<Car> GetAllByCategory(int categoryId)
+        public List<Car> GetAllBtCategoryId(int id)
         {
-            return _carDal.GetAllByCategory(categoryId);
+            return _carDal.GetAll(p => p.CategoryId == id);
         }
 
-        public List<Car> GetById(int carId)
+        public List<Car> GetByUnitPrice(decimal min, decimal max)
         {
-            return _carDal.GetById(carId);
+            return _carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max);
         }
+        //public void Add(Car car)
+        //{
+        //    _carDal.Add(car);
+        //}
 
-        public void Update(Car car)
-        {
-            _carDal.Update(car);
-        }
+        //public void Delete(Car car)
+        //{
+        //    _carDal.Delete(car);
+        //}
+
+        //public List<Car> GetAll()
+        //{
+        //    return _carDal.GetAll();
+        //}
+
+        //public List<Car> GetAllByCategory(int categoryId)
+        //{
+        //    return _carDal.GetAllByCategory(categoryId);
+        //}
+
+        //public List<Car> GetById(int carId)
+        //{
+        //    return _carDal.GetById(carId);
+        //}
+
+        //public void Update(Car car)
+        //{
+        //    _carDal.Update(car);
+        //}
     }
 }
