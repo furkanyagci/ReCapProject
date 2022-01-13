@@ -9,12 +9,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfBrandDal : IBrandDal
     {
-        public void Add(Brand product)
+        public void Add(Brand brand)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Brand product)
+        public void Delete(Brand brand)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
             throw new NotImplementedException();
         }
 
-        public void Update(Brand product)
+        public void Update(Brand brand)
         {
             throw new NotImplementedException();
         }

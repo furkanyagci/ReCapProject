@@ -9,12 +9,12 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfColorDal : IColorDal
     {
-        public void Add(Color product)
+        public void Add(Color color)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Color product)
+        public void Delete(Color color)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace DataAccess.Concrete.EntityFramework
             throw new NotImplementedException();
         }
 
-        public void Update(Color product)
+        public void Update(Color color)
         {
             throw new NotImplementedException();
         }

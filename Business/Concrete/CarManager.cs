@@ -15,6 +15,18 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        public void Add(Car car)
+        {
+            if (car.CarName.Length >= 2 && car.DailyPrice>0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                throw new NotImplementedException("Araba ismi minimum 2 karakter olmalıdır. - Araba günlük fiyatı 0'dan büyük olmalıdır.");
+            }
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
@@ -29,6 +41,20 @@ namespace Business.Concrete
         {
             return _carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max);
         }
+
+        public List<Car> GetCarsByBrandId(int id)
+        {
+            return _carDal.GetAll(p => p.BrandId == id);
+        }
+
+        public List<Car> GetCarsByColorId(int id)
+        {
+            return _carDal.GetAll(p => p.ColorId == id);
+        }
+
+
+
+        //Aşağıdaki kodlara gerek kalmadı. Sistemi Generic design pattern'e çevirdik.
         //public void Add(Car car)
         //{
         //    _carDal.Add(car);
