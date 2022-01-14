@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,45 +10,23 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, ReCapProjectContext>, ICarDal
     {
-        public void Add(Car car)
+        public List<CarDetailDto> GetCarDetails()
         {
             using (ReCapProjectContext context = new ReCapProjectContext())
             {
-                context.Cars.Add(car);
-                context.SaveChanges();
-            }
-        }
+                var result = from c in context.Cars
+                             join ct in context.Categories
+                             on c.CategoryId equals ct.Id
+                             join col in context.Colors
+                             on c.ColorId equals col.Id
+                             join br in context.Brands
+                             on c.BrandId equals br.Id
+                             select new CarDetailDto { CarId = c.Id, CarName = c.CarName, BrandName = br.Name, ModelYear = c.ModelYear, DailyPrice = c.DailyPrice, ColorName = col.Name, CategoryName = ct.CategoryName };
 
-        public void Delete(Car car)
-        {
-            using (ReCapProjectContext context = new ReCapProjectContext())
-            {
-                context.Cars.Remove(context.Cars.SingleOrDefault(p=>p.Id==car.Id));//context.Cars.Remove(car); buşekilde yazarsak silme işlemi olmaz. Db deki alan ile tam eşleştirmemiz gerekir o yüzden car.Id ile eşleştirdik
-                context.SaveChanges();
+                return result.ToList();
             }
-        }
-
-        public Car Get(Expression<Func<Car, bool>> filter = null)
-        {
-            using (ReCapProjectContext context = new ReCapProjectContext())
-            {
-                return context.Cars.SingleOrDefault(filter);
-            }
-        }
-
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
-        {
-            using (ReCapProjectContext context = new ReCapProjectContext())
-            {
-                return filter == null ? context.Set<Car>().ToList() : context.Set<Car>().Where(filter).ToList(); //Arkda planda bize Select * from Car döndürür. Ternary ifyazdık eğer filtre null ise Car tablosunu lit halinde verecek filtre null değilse filtreleyip verecek.
-            }
-        }
-
-        public void Update(Car car)
-        {
-            throw new NotImplementedException();
         }
     }
 }

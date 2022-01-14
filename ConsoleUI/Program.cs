@@ -11,22 +11,25 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
 
-            CarManager carManager = new CarManager(new EfCarDal());//EfCarDal class'ını gönderdik CarManager parametresi ICarDal interface'i implemente eden bir class istiyor. EfCarDal ICarDal implemente ettiği için ICarDal tipinde parametre olarak gönderebiliyoruz.
-            foreach (var car in carManager.GetByUnitPrice(40, 1000))
-            {
-                Console.WriteLine(car.Id + " - " + car.CarName + " - " + car.DailyPrice + " - " + car.Description);
-            }
+            CarTest();
 
-            Car car1 = new Car();
-            car1.BrandId = 1;
-            car1.ColorId = 1;
-            car1.CategoryId = 1;
-            car1.CarName = "Bmw 520i"; //Araba ismi minimum 2 karakter olmalıdır
-            car1.ModelYear = 2019;
-            car1.DailyPrice = 850; //Araba günlük fiyatı 0'dan büyük olmalıdır.
-            car1.Description = "Lüks Sedan";
 
-            carManager.Add(car1);
+            //CarManager carManager = new CarManager(new EfCarDal());//EfCarDal class'ını gönderdik CarManager parametresi ICarDal interface'i implemente eden bir class istiyor. EfCarDal ICarDal implemente ettiği için ICarDal tipinde parametre olarak gönderebiliyoruz.
+            //foreach (var car in carManager.GetByUnitPrice(40, 1000))
+            //{
+            //    Console.WriteLine(car.Id + " - " + car.CarName + " - " + car.DailyPrice + " - " + car.Description);
+            //}
+
+            //Car car1 = new Car();
+            //car1.BrandId = 1;
+            //car1.ColorId = 1;
+            //car1.CategoryId = 1;
+            //car1.CarName = "Bmw 520i"; //Araba ismi minimum 2 karakter olmalıdır
+            //car1.ModelYear = 2019;
+            //car1.DailyPrice = 850; //Araba günlük fiyatı 0'dan büyük olmalıdır.
+            //car1.Description = "Lüks Sedan";
+
+            //carManager.Add(car1);
 
 
 
@@ -74,5 +77,14 @@ namespace ConsoleUI
             //}
 
         }
+        private static void CarTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());//EfProdcutDal yazdıktan sonra buraya yazdık. Bu PnP oldu yani tak çalıştır. Diğer hiçbir katmana dokunmadık EfProdcutDal oluşturduk ve buraya yazdık.Sitem bir anda EntityFramework altyapısına dönmüş oldu.
+            foreach (var car in carManager.GetCarDetails())
+            {
+                Console.WriteLine(car.CarName + " - " + car.BrandName+" - "+car.CategoryName+" - "+car.ColorName+" - "+car.DailyPrice+" - "+car.ModelYear);
+            } 
+        }
+
     }
 }
