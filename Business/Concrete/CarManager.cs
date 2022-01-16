@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -17,26 +19,34 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
-            if (car.CarName.Length >= 2 && car.DailyPrice > 0)
+            if (car.CarName.Length > 2 && car.DailyPrice > 0)
             {
                 _carDal.Add(car);
+                return new SuccessResult(Messages.ProductAdded);
             }
             else
             {
-                throw new NotImplementedException("Araba ismi minimum 2 karakter olmalıdır. - Araba günlük fiyatı 0'dan büyük olmalıdır.");
+                if (car.CarName.Length <= 2)
+                {
+                    return new ErrorResult(Messages.ProductNotAdded + " - " + Messages.ProductNameInvalid);
+                }
+                else
+                {
+                    return new ErrorResult(Messages.ProductNotAdded + " - " + Messages.ProductPriceInvalid);
+                }
             }
         }
 
         public void Delete(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Delete(car);
         }
 
         public void Update(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Update(car);
         }
 
         public List<Car> GetAll()
