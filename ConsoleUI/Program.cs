@@ -11,18 +11,50 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal());
-            Car car = new Car();
-            car.BrandId = 1002;
-            car.ColorId = 1002;
-            car.CategoryId = 3;
-            car.CarName = "Bmw"; //Araba ismi minimum 2 karakter olmalıdır
-            car.ModelYear = 2022;
-            car.DailyPrice = 1050; //Araba günlük fiyatı 0'dan büyük olmalıdır.
-            car.Description = "Son Model Lüks Sedan";
+            Rental rental = new Rental();
+            rental.CarId = 1;
+            rental.CustomerId = 1;
+            string date = DateTime.Now.ToString("MM.dd.yyyy hh:mm:ss");
+            rental.RentDate = Convert.ToDateTime(date);
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            Console.WriteLine(rentalManager.Add(rental).Message);
 
-            Console.WriteLine(CarAdd(carManager, car).Message);
-            CarTest();
+
+
+
+            //CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            //Customer customer = new Customer();
+            //customer.UserId = 7;
+            //customer.CompanyName = "KK AŞ";
+            //customerManager.Add(customer);
+
+            //UserManager userManager = new UserManager(new EfUserDal());
+            //User user = new User();
+            //user.FirstName = "Kazım";
+            //user.LastName = "Karabekir";
+            //user.Email = "Kazimkarabekir@gmail.com";
+            //user.Password = "987654321";
+
+            //Console.WriteLine(userManager.Add(user).Message);
+            //user.Id = 6;
+            //userManager.Delete(user);
+
+
+
+
+
+            //CarManager carManager = new CarManager(new EfCarDal());
+            //Car car = new Car();
+            //car.BrandId = 1002;
+            //car.ColorId = 1002;
+            //car.CategoryId = 3;
+            //car.CarName = "Bmw"; //Araba ismi minimum 2 karakter olmalıdır
+            //car.ModelYear = 2022;
+            //car.DailyPrice = 1050; //Araba günlük fiyatı 0'dan büyük olmalıdır.
+            //car.Description = "Son Model Lüks Sedan";
+
+            //Console.WriteLine(CarAdd(carManager, car).Message);
+            //CarTest();
             //car.Id = 1003;//Id silinecek carid olmalı
             //CarDelete(carManager, car);//metot içinde id gönder
 
@@ -34,46 +66,6 @@ namespace ConsoleUI
 
             ////CategoryGetAll();
             //CategoryAdd(new Category { CategoryName = "Yeni Kategori" });
-
-
-
-
-            //CarManager carManager = new CarManager(new EfCarDal());//EfCarDal class'ını gönderdik CarManager parametresi ICarDal interface'i implemente eden bir class istiyor. EfCarDal ICarDal implemente ettiği için ICarDal tipinde parametre olarak gönderebiliyoruz.
-            //foreach (var car in carManager.GetByUnitPrice(40, 1000))
-            //{
-            //    Console.WriteLine(car.Id + " - " + car.CarName + " - " + car.DailyPrice + " - " + car.Description);
-            //}
-
-            //CarManager carManager = new CarManager(new InMemoryCarDal());
-
-            //foreach (var car in carManager.GetAll())
-            //{
-            //    Console.WriteLine(car.Id+" - "+car.BrandId +" - " + car.CategoryId +" - " +car.ColorId +" - " + car.ModelYear + " - " +car.Description+" - "+ car.DailyPrice);
-            //}
-
-            //Car car1 = new Car { Id = 5, BrandId = 98, CategoryId = 1, ColorId = 30, DailyPrice = 1250, Description = "Station Wagon otomobil", ModelYear = 2022 };
-            //carManager.Add(car1);
-
-            //carManager.Delete(car1);
-
-            //foreach (var car in carManager.GetAllByCategory(2))
-            //{
-            //    Console.WriteLine("GetAllByCategory ile çağırılan : " + car.Id + " - " + car.BrandId + " - " + car.CategoryId + " - " + car.ColorId + " - " + car.ModelYear + " - " + car.Description + " - " + car.DailyPrice);
-            //}
-
-            //foreach (var car in carManager.GetById(2))
-            //{
-            //    Console.WriteLine("GetById ile çağırılan : " + car.Id + " - " + car.BrandId + " - " + car.CategoryId + " - " + car.ColorId + " - " + car.ModelYear + " - " + car.Description + " - " + car.DailyPrice);
-            //}
-
-            //Car car2 = new Car { Id = 1, BrandId = 98, CategoryId = 7, ColorId = 30, DailyPrice = 999, Description = "Sport sedan otomobil", ModelYear = 2023 };
-            //carManager.Update(car2);
-
-            //foreach (var car in carManager.GetAll())
-            //{
-            //    Console.WriteLine(car.Id + " - " + car.BrandId + " - " + car.CategoryId + " - " + car.ColorId + " - " + car.ModelYear + " - " + car.Description + " - " + car.DailyPrice);
-            //}
-
         }
 
         private static void ColorAdd(Color color)

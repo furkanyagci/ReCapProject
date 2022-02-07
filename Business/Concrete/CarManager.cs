@@ -24,17 +24,17 @@ namespace Business.Concrete
             if (car.CarName.Length > 2 && car.DailyPrice > 0)
             {
                 _carDal.Add(car);
-                return new SuccessResult(Messages.ProductAdded);
+                return new SuccessResult(Messages.Added);
             }
             else
             {
                 if (car.CarName.Length <= 2)
                 {
-                    return new ErrorResult(Messages.ProductNotAdded + " - " + Messages.ProductNameInvalid);
+                    return new ErrorResult(Messages.NotAdded + " - " + Messages.NameInvalid);
                 }
                 else
                 {
-                    return new ErrorResult(Messages.ProductNotAdded + " - " + Messages.ProductPriceInvalid);
+                    return new ErrorResult(Messages.NotAdded + " - " + Messages.PriceInvalid);
                 }
             }
         }
