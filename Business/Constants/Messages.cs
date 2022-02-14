@@ -16,5 +16,8 @@ namespace Business.Constants
         public static string UserPasswordInvalid = "Şifre en az 6 karakter olmalı";
         public static string CarNotRental = "Araç şuan kirada. Kiralama işlemi için başka araç seçiniz.";
         public static string CarRentalSuccess = "Araç kiralama işlemi başarılı";
+
+        public static string CarImageLimit = "En fazla 5 resim eklenebilir. Ekleme işlemi başarısız !";
+
     }
 }

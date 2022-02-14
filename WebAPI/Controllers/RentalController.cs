@@ -1,14 +1,9 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
-
     [Route("api/[controller]")]//Buradaki route ise bize nasıl istekde bulunacakları. yani https://localhost:44358/api/rental yazarak bu class'a ulaşabilirler demek
     [ApiController]
     public class RentalController:ControllerBase
